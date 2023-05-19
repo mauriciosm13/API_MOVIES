@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mmmendon\\source\\repos\\FilmesApi\\FilmesApi\\FilmesApi.csproj",
+      "projectUniqueName": "C:\\Users\\mmmendon\\Documents\\GitHub\\API_MOVIES\\FilmesApi\\FilmesApi\\FilmesApi.csproj",
       "projectName": "FilmesApi",
-      "projectPath": "C:\\Users\\mmmendon\\source\\repos\\FilmesApi\\FilmesApi\\FilmesApi.csproj",
+      "projectPath": "C:\\Users\\mmmendon\\Documents\\GitHub\\API_MOVIES\\FilmesApi\\FilmesApi\\FilmesApi.csproj",
       "packagesPath": "C:\\Users\\mmmendon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mmmendon\\source\\repos\\FilmesApi\\FilmesApi\\obj\\",
+      "outputPath": "C:\\Users\\mmmendon\\Documents\\GitHub\\API_MOVIES\\FilmesApi\\FilmesApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mmmendon\\AppData\\Roaming\\NuGet\\NuGet.Config",
