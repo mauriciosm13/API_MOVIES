@@ -6,11 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class CinemaController : ControllerBase
     {
-        private CinemasContext _context;
+        private MoviesContext _context;
         private IMapper _mapper;
 
+        public CinemaController(MoviesContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
 
         [HttpPost]
         public IActionResult AddCinema([FromBody] CreateCinemaDto cinemaDto)
@@ -22,10 +29,11 @@ namespace FilmesApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReadCinemaDto> GetCinemas()
+        public IEnumerable<ReadCinemaDto> GetCin1emas()
         {
             return _mapper.Map<List<ReadCinemaDto>>(_context.Cinemas.ToList());
         }
+
         [HttpGet("{id}")]
         public object GetCinemaById(int Id)
         {
@@ -37,6 +45,7 @@ namespace FilmesApi.Controllers
             }
             return NotFound();
         }
+
         [HttpPut]
         public IActionResult UpdateCinema(int id, [FromBody] UpdateCinemaDto cinemaDto)
         {

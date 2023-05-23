@@ -9,5 +9,6 @@ namespace FilmesApi.Models
         public int Id { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
+        public virtual Cinema Cinema { get; set; }
     }
 }
