@@ -14,5 +14,6 @@ public class Movie
     public string Gender { get; set; }
     [Required(ErrorMessage = "A Duração é obrigatorio")]
     public int Duration { get; set; }
+    public virtual ICollection<Movie> Sessions { get; set; }
 }
 
