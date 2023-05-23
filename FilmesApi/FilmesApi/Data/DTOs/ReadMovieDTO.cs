@@ -8,5 +8,6 @@ namespace FilmesApi.Data.DTOs
         public string Gender { get; set; }
         public int Duration { get; set; }
         public DateTime TimeGet { get; set; } = DateTime.Now;
+        public ICollection<ReadSessionDto> ReadSessionsDto { get; set; }
     }
 }
