@@ -32,9 +32,14 @@ public class FilmeController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<ReadMovieDTO> GetMovies([FromQuery] int skip = 0, int take = 50)
-    { 
-        return  _mapper.Map<List<ReadMovieDTO>>(_context.Movies.Skip(skip).Take(take).ToList());
+    public IEnumerable<ReadMovieDTO> GetMovies([FromQuery] int skip = 0, int take = 50, string? cinemaName = null)
+    {
+        if (cinemaName == null)
+        {
+            return _mapper.Map<List<ReadMovieDTO>>(_context.Movies.Skip(skip).Take(take).ToList());
+        }
+
+        return _mapper.Map<List<ReadMovieDTO>>(_context.Movies.Skip(skip).Take(take).Where(movie => movie.Sessions.Any(session => session.Cinema.Name == cinemaName)).ToList());
     }
 
     [HttpGet("{id}")]
