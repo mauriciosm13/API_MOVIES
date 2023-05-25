@@ -4,7 +4,6 @@ using FilmesApi.Data.DTOs;
 using FilmesApi.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace FilmesApi.Controllers;
 
@@ -28,7 +27,7 @@ public class FilmeController : ControllerBase
         Movie filme = _mapper.Map<Movie>(filmeDto);
         _context.Movies.Add(filme);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(GetMovie), new { id = filme.Id}, filme);
+        return CreatedAtAction(nameof(GetMovie), new { id = filme.Id }, filme);
     }
 
     [HttpGet]
@@ -87,7 +86,7 @@ public class FilmeController : ControllerBase
     }
 
     [HttpDelete("{Id}")]
-    public IActionResult DeleteMovie(int id) 
+    public IActionResult DeleteMovie(int id)
     {
         var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
         if (filme == null) return NotFound();
