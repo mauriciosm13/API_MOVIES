@@ -51,3 +51,6 @@ C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\
 C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
 C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\mmmendon\Documents\GitHub\API_MOVIES\UsuariosApi\UsuariosApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
