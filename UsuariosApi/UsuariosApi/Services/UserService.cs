@@ -14,13 +14,15 @@ namespace UsuariosApi.Services
         private IMapper _mapper;
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
+        public IConfiguration _configuration;
 
 
-        public UserService(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserService(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _configuration = configuration;
         }
 
 
@@ -55,7 +57,7 @@ namespace UsuariosApi.Services
                     new Claim(ClaimTypes.DateOfBirth, user.DateBirth.ToString())
                 };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HFASHFUASIHFUIB895239hHA"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"]));
 
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
