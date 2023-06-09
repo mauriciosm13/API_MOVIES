@@ -53,44 +53,20 @@ public class FilmeController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieDTO filmeDto)
     {
-        var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
-        if (filme == null) return NotFound();
-
-        _mapper.Map(filmeDto, filme);
-        _context.SaveChanges();
+        var returnUpdate = _service.UpdateMovie(id, filmeDto);
+        if (returnUpdate != id)
+            return NotFound();
 
         return NoContent();
-    }
-
-    [HttpPatch("{Id}")]
-    public IActionResult UpdatePatchMovie(int id, JsonPatchDocument<UpdateMovieDTO> patch)
-    {
-        var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
-        if (filme == null) return NotFound();
-
-        var movieUpdate = _mapper.Map<UpdateMovieDTO>(filme);
-
-        patch.ApplyTo(movieUpdate, ModelState);
-
-        if (!TryValidateModel(movieUpdate))
-        {
-            return ValidationProblem(ModelState);
-        }
-
-        _mapper.Map(movieUpdate, filme);
-        _context.SaveChanges();
-
-        return NoContent();
+        
     }
 
     [HttpDelete("{Id}")]
     public IActionResult DeleteMovie(int id)
     {
-        var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
-        if (filme == null) return NotFound();
-
-        _context.Remove(filme);
-        _context.SaveChanges();
+        var resultReturn = _service.DeleteMovie(id);
+        if (resultReturn != id)
+            return NotFound();
 
         return NoContent();
     }

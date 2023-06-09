@@ -2,6 +2,8 @@
 using FilmesApi.Data;
 using FilmesApi.Data.DTOs;
 using FilmesApi.Models;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilmesApi.Services
@@ -41,6 +43,29 @@ namespace FilmesApi.Services
             if (filme == null) return null;
 
             return _mapper.Map<ReadMovieDTO>(filme);
+        }
+
+        public int UpdateMovie(int id, UpdateMovieDTO filmeDto)
+        {
+            var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
+            if (filme == null) 
+                return 0;
+
+            _mapper.Map(filmeDto, filme);
+            _context.SaveChanges();
+
+            return id;
+        }
+
+        public int DeleteMovie(int id)
+        {
+            var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
+            if (filme == null) return 0;
+
+            _context.Remove(filme);
+            _context.SaveChanges();
+
+            return id;
         }
     }
 }
