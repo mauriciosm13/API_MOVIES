@@ -1,4 +1,5 @@
 using FilmesApi.Data;
+using FilmesApi.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddDbContext<MoviesContext>(opts => opts.UseLazyLoadingProxies(
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+
+builder.Services.AddScoped<FilmeService>();
 
 // Add services to the container.
 

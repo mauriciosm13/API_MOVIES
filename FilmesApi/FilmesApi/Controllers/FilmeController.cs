@@ -2,6 +2,7 @@
 using FilmesApi.Data;
 using FilmesApi.Data.DTOs;
 using FilmesApi.Models;
+using FilmesApi.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,42 +15,39 @@ public class FilmeController : ControllerBase
 
     private MoviesContext _context;
     private IMapper _mapper;
+    private FilmeService _service;
 
-    public FilmeController(MoviesContext context, IMapper mapper)
+    public FilmeController(MoviesContext context, IMapper mapper, FilmeService service)
     {
         _context = context;
         _mapper = mapper;
+        _service = service;
     }
 
     [HttpPost]
     public IActionResult AddMovie([FromBody] CreateMovieDTO filmeDto)
     {
-        Movie filme = _mapper.Map<Movie>(filmeDto);
-        _context.Movies.Add(filme);
-        _context.SaveChanges();
-        return CreatedAtAction(nameof(GetMovie), new { id = filme.Id }, filme);
+        _service.AddMovie(filmeDto);
+
+        return Ok("Filme cadastrado com sucesso");
     }
 
     [HttpGet]
-    public IEnumerable<ReadMovieDTO> GetMovies([FromQuery] int skip = 0, int take = 50, string? cinemaName = null)
+    public IEnumerable<ReadMovieDTO> GetMovies([FromQuery] int skip = 0, int take = 50, string cinemaName = null)
     {
-        if (cinemaName == null)
-        {
-            return _mapper.Map<List<ReadMovieDTO>>(_context.Movies.Skip(skip).Take(take).ToList());
-        }
 
-        return _mapper.Map<List<ReadMovieDTO>>(_context.Movies.Skip(skip).Take(take).Where(movie => movie.Sessions.Any(session => session.Cinema.Name == cinemaName)).ToList());
+        var listReturn = _service.GetMovies(skip, take, cinemaName);
+
+        return listReturn;
     }
 
     [HttpGet("{id}")]
     public IActionResult GetMovie(int id)
     {
-        var filme = _context.Movies.FirstOrDefault(filme => filme.Id == id);
 
-        if (filme == null) return NotFound();
-
-        var filmeDto = _mapper.Map<ReadMovieDTO>(filme);
-        return Ok(filmeDto);
+        var movie = _service.GetMovie(id);
+       
+        return Ok(movie);
     }
 
     [HttpPut("{id}")]
